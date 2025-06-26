@@ -34,8 +34,7 @@ pip install -r requirements.txt
 # Set up environment variables:
 
 Create a .env file in the root directory.
-Add your API keys:SERPER_API_KEY=your_serper_api_key
-GROQ_API_KEY=your_groq_api_key
+Add your API keys: SERPER_API_KEY=your_serper_api_key
 
 
 # Usage
@@ -49,7 +48,6 @@ Review the feedback, improved resume, and suggested job roles.
 ### ├── requirements.txt         # Dependency list
 ### ├── cv-*.docx               # Sample resume files
 ### ├── Bruce-Wayne-CV.pdf      # Sample PDF resume
-### ├── Resume_Agent_V2_R.ipynb # Jupyter notebook with development notes
 ### ├── README.md               # This file
 ### └── .gitignore              # Git ignore file
 
