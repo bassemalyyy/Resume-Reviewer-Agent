@@ -17,32 +17,32 @@ Required libraries listed in requirements.txt
 
 # Installation
 
-## git clone https://github.com/bassemalyyy/Resume-Reviewer-Agent.git
+git clone https://github.com/bassemalyyy/Resume-Reviewer-Agent.git
 
 
 # Create a virtual environment (optional):
 
-## python -m venv venv
-## source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 
 # Install dependencies:
 
-## pip install -r requirements.txt
+pip install -r requirements.txt
 
 
 # Set up environment variables:
 
-## Create a .env file in the root directory.
-## Add your API keys:SERPER_API_KEY=your_serper_api_key
-## GROQ_API_KEY=your_groq_api_key
+Create a .env file in the root directory.
+Add your API keys:SERPER_API_KEY=your_serper_api_key
+GROQ_API_KEY=your_groq_api_key
 
 
 # Usage
 
-## Run the Streamlit app:streamlit run resume-review-agent.py
-## Upload a resume (PDF or DOCX) and enter your preferred location.
-## Review the feedback, improved resume, and suggested job roles.
+Run the Streamlit app:streamlit run resume-review-agent.py
+Upload a resume (PDF or DOCX) and enter your preferred location.
+Review the feedback, improved resume, and suggested job roles.
 
 # Project Structure
 ├── resume-review-agent.py    # Main application file
