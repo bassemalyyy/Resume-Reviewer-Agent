@@ -1,13 +1,13 @@
 # Resume Reviewer Agent
 
-A resume review and job matching tool built with CrewAI, Streamlit, and various text extraction libraries. This project helps users improve their resumes and find relevant job opportunities based on their skills and preferred location.
+A resume reviewer and rewriter tool built with CrewAI, Streamlit, and various text extraction libraries. This project helps users improve their resumes and get interview tips based on the job title and the location for the job search.
 
 # Features
 
 Extracts text from PDF and DOCX resume files.
 Provides feedback to enhance resume content.
 Rewrites resumes to better highlight qualifications.
-Matches users with relevant job postings using web search tools.
+Offer interview tips for better preparation.
 Offers a user-friendly interface via Streamlit.
 
 # Prerequisites
