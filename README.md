@@ -1,4 +1,4 @@
-Resume-Agent-V2
+Resume Reviewer Agent
 A resume review and job matching tool built with CrewAI, Streamlit, and various text extraction libraries. This project helps users improve their resumes and find relevant job opportunities based on their skills and preferred location.
 Features
 
@@ -15,8 +15,8 @@ Required libraries listed in requirements.txt
 
 Installation
 
-## git clone https://github.com/your-username/Resume-Agent-V2.git
-## cd Resume-Agent-V2
+## git clone https://github.com/bassemalyyy/Resume-Reviewer-Agent.git
+cd Resume-Agent-V2
 
 
 Create a virtual environment (optional):python -m venv venv
