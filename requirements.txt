@@ -1,0 +1,8 @@
+PyMuPDF
+mammoth
+streamlit
+crewai 
+crewai-tools
+langchain
+langchain-community
+langchain-openai
