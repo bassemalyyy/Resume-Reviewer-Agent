@@ -32,8 +32,7 @@ pip install -r requirements.txt
 
 
 # Set up environment variables:
-
-Create a .env file in the root directory.
+Set up the API keys using os.enivron[] explicitly in the code.
 
 Add your API keys: SERPER_API_KEY=your_serper_api_key
 
