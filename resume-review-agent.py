@@ -1,9 +1,9 @@
 import streamlit as st
 import fitz  # PyMuPDF for PDF processing
 import mammoth  # Mammoth for DOCX to HTML conversion
+import io
 import os
 from crewai import Agent, Task, Crew
-from crewai_tools import SerperDevTool
 from langchain_openai import ChatOpenAI
 import warnings
 
@@ -14,27 +14,26 @@ warnings.filterwarnings('ignore')
 llm = ChatOpenAI(api_key="ollama", model="ollama/llama3.2", base_url="http://localhost:11434/v1")
 
 # File extraction functions
-def extract_text_from_pdf(file_path):
+def extract_text_from_pdf(file_content):
     """Extracts text from a PDF file using PyMuPDF."""
-    doc = fitz.open(file_path)
+    doc = fitz.open(stream=file_content, filetype="pdf")
     text = ""
     for page in doc:
         text += page.get_text()
     return text
 
-def extract_text_from_docx(file_path):
+def extract_text_from_docx(file_content):
     """Extracts text from a DOCX file using Mammoth for cleaner output."""
-    with open(file_path, "rb") as docx_file:
-        result = mammoth.extract_raw_text(docx_file)
-        return result.value.strip()
+    result = mammoth.extract_raw_text(io.BytesIO(file_content))
+    return result.value.strip()
 
 def extract_text_from_resume(file):
     """Determines file type and extracts text."""
-    file_path = file.name
-    if file_path.endswith(".pdf"):
-        return extract_text_from_pdf(file_path)
-    elif file_path.endswith(".docx"):
-        return extract_text_from_docx(file_path)
+    file_content = file.getvalue()
+    if file.name.endswith(".pdf"):
+        return extract_text_from_pdf(file_content)
+    elif file.name.endswith(".docx"):
+        return extract_text_from_docx(file_content)
     else:
         return "Unsupported file format."
 
@@ -75,33 +74,29 @@ resume_advisor_task = Task(
     agent=resume_advisor
 )
 
-search_tool = SerperDevTool()
-
-job_researcher = Agent(
-    role="Senior Recruitment Consultant",
-    goal="Find the 5 most relevant, recently posted jobs based on the improved resume received from resume advisor and the location preference",
-    tools=[search_tool],
+interview_preparation_tips = Agent(
+    role="Interview Preparation Expert",
+    goal="Provide tailored interview preparation tips based on the job title from the resume and the specified location",
     verbose=True,
-    backstory="""As a senior recruitment consultant your prowess in finding the most relevant jobs based on the resume and location preference is unmatched. 
-    You can scan the resume efficiently, identify the most suitable job roles and search for the best suited recently posted open job positions at the preferred location.""",
+    backstory="With extensive experience in career coaching, you excel at crafting interview strategies tailored to specific job roles and regional expectations.",
     llm=llm
 )
 
-research_task = Task(
-    description="""Find the 5 most relevant recent job postings based on the resume received from resume advisor and location preference. This is the preferred location: {location}. 
-    Use the tools to gather relevant content and shortlist the 5 most relevant, recent, job openings""",
-    expected_output="A bullet point list of the 5 job openings, with the appropriate links and detailed description about each job, in markdown format",
-    agent=job_researcher
+interview_tips_task = Task(
+    description="""Provide tailored interview preparation tips based on the job title extracted from the resume and the specified location. 
+    Analyze the resume to determine the candidate's job title or most relevant job role. Offer tips that include common interview questions, preparation strategies, and location-specific advice (e.g., cultural norms or industry trends in {location}). Present the tips in a bullet point list in markdown format. This is the resume: {resume}. This is the preferred location: {location}.""",
+    expected_output="A bullet point list of interview preparation tips in markdown format",
+    agent=interview_preparation_tips
 )
 
 crew = Crew(
-    agents=[resume_feedback, resume_advisor, job_researcher],
-    tasks=[resume_feedback_task, resume_advisor_task, research_task],
+    agents=[resume_feedback, resume_advisor, interview_preparation_tips],
+    tasks=[resume_feedback_task, resume_advisor_task, interview_tips_task],
     verbose=True
 )
 
 # Streamlit UI
-st.set_page_config(page_title="Resume Feedback & Job Matching", layout="wide")
+st.set_page_config(page_title="Resume Feedback & Interview Prep", layout="wide")
 
 # Custom CSS for better styling
 st.markdown("""
@@ -155,7 +150,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("Resume Feedback and Job Matching Tool")
+st.title("Resume Feedback and Interview Preparation Tool")
 st.markdown("*Expected Runtime: ~1 Minute*")
 
 # Input Section
@@ -176,12 +171,8 @@ if submit_button:
     elif not location:
         st.error("Please enter a preferred location.")
     else:
-        with st.spinner("Analyzing your resume and finding job matches..."):
-            # Save uploaded file temporarily
-            with open("temp_resume.pdf", "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            
-            # Process resume
+        with st.spinner("Analyzing your resume and preparing interview tips..."):
+            # Process resume directly from uploaded file
             resume_text = extract_text_from_resume(uploaded_file)
             if resume_text == "Unsupported file format.":
                 st.error("Unsupported file format. Please upload a PDF or DOCX file.")
@@ -191,7 +182,7 @@ if submit_button:
                 # Extract outputs
                 feedback = resume_feedback_task.output.raw.strip("```markdown").strip("```").strip()
                 improved_resume = resume_advisor_task.output.raw.strip("```markdown").strip("```").strip()
-                job_roles = research_task.output.raw.strip("```markdown").strip("```").strip()
+                interview_tips = interview_tips_task.output.raw.strip("```markdown").strip("```").strip()
                 
                 # Display results
                 st.markdown("<div class='section-header'>Resume Feedback</div>", unsafe_allow_html=True)
@@ -200,9 +191,5 @@ if submit_button:
                 st.markdown("<div class='section-header'>Improved Resume</div>", unsafe_allow_html=True)
                 st.markdown(improved_resume, unsafe_allow_html=True)
                 
-                st.markdown("<div class='section-header'>Relevant Job Roles</div>", unsafe_allow_html=True)
-                st.markdown(job_roles, unsafe_allow_html=True)
-                
-            # Clean up temporary file
-            if os.path.exists("temp_resume.pdf"):
-                os.remove("temp_resume.pdf")
+                st.markdown("<div class='section-header'>Interview Preparation Tips</div>", unsafe_allow_html=True)
+                st.markdown(interview_tips, unsafe_allow_html=True)
