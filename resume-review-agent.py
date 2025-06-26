@@ -10,10 +10,6 @@ import warnings
 # Warning control
 warnings.filterwarnings('ignore')
 
-# Environment variables
-os.environ["SERPER_API_KEY"] = "241de7455739cd031951b6a94777ee844bb648e4"
-os.environ["GROQ_API_KEY"] = "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"
-
 # Initialize the LLM
 llm = ChatOpenAI(api_key="ollama", model="ollama/llama3.2", base_url="http://localhost:11434/v1")
 
