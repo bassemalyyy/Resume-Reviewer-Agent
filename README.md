@@ -15,8 +15,8 @@ Required libraries listed in requirements.txt
 
 Installation
 
-Clone the repository:git clone https://github.com/your-username/Resume-Agent-V2.git
-cd Resume-Agent-V2
+## git clone https://github.com/your-username/Resume-Agent-V2.git
+## cd Resume-Agent-V2
 
 
 Create a virtual environment (optional):python -m venv venv
