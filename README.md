@@ -45,13 +45,13 @@ Upload a resume (PDF or DOCX) and enter your preferred location.
 Review the feedback, improved resume, and suggested job roles.
 
 # Project Structure
-├── resume-review-agent.py    # Main application file
-├── requirements.txt         # Dependency list
-├── cv-*.docx               # Sample resume files
-├── Bruce-Wayne-CV.pdf      # Sample PDF resume
-├── Resume_Agent_V2_R.ipynb # Jupyter notebook with development notes
-├── README.md               # This file
-└── .gitignore              # Git ignore file
+# ├── resume-review-agent.py    # Main application file
+# ├── requirements.txt         # Dependency list
+# ├── cv-*.docx               # Sample resume files
+# ├── Bruce-Wayne-CV.pdf      # Sample PDF resume
+# ├── Resume_Agent_V2_R.ipynb # Jupyter notebook with development notes
+# ├── README.md               # This file
+# └── .gitignore              # Git ignore file
 
 # Contributing
 Feel free to fork this repository and submit pull requests. Please ensure you follow the existing code style and include tests where applicable.
@@ -59,6 +59,6 @@ License
 This project is licensed under the MIT License - see the LICENSE file for details (add a LICENSE file if desired).
 Acknowledgments
 
-# CrewAI for the agent framework.
-# Streamlit for the web interface.
-# PyMuPDF and Mammoth for document processing.
+CrewAI for the agent framework.
+Streamlit for the web interface.
+PyMuPDF and Mammoth for document processing.
