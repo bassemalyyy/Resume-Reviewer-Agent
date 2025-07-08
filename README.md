@@ -57,8 +57,6 @@ Review the feedback, improved resume, and suggested job roles.
 > ├── Bruce-Wayne-CV.pdf      # Sample PDF resume
 > 
 > ├── README.md               # This file
-> 
-> └── .gitignore              # Git ignore file
 
 # Contributing
 Feel free to fork this repository and submit pull requests. Please ensure you follow the existing code style and include tests where applicable.
