@@ -17,10 +17,12 @@ Required libraries listed in requirements.txt
 
 # Installation
 
+```sh
 git clone https://github.com/bassemalyyy/Resume-Reviewer-Agent.git
-
+```
 
 # Create a virtual environment (optional):
+
 
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -28,14 +30,16 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies:
 
+```sh
 pip install -r requirements.txt
-
+```
 
 # Set up environment variables:
 Set up the API keys using os.enivron[] explicitly in the code.
 
-Add your API keys: SERPER_API_KEY=your_serper_api_key
-
+```sh
+SERPER_API_KEY=your_serper_api_key
+```
 
 # Usage
 
@@ -44,19 +48,21 @@ Upload a resume (PDF or DOCX) and enter your preferred location.
 Review the feedback, improved resume, and suggested job roles.
 
 # Project Structure
-### ├── resume-review-agent.py    # Main application file
-### ├── requirements.txt         # Dependency list
-### ├── cv-*.docx               # Sample resume files
-### ├── Bruce-Wayne-CV.pdf      # Sample PDF resume
-### ├── README.md               # This file
-### └── .gitignore              # Git ignore file
+> ├── resume-review-agent.py    # Main application file
+> ├── requirements.txt         # Dependency list
+> ├── cv-*.docx               # Sample resume files
+> ├── Bruce-Wayne-CV.pdf      # Sample PDF resume
+> ├── README.md               # This file
+> └── .gitignore              # Git ignore file
 
 # Contributing
 Feel free to fork this repository and submit pull requests. Please ensure you follow the existing code style and include tests where applicable.
-License
-This project is licensed under the MIT License - see the LICENSE file for details (add a LICENSE file if desired).
-Acknowledgments
 
+# License
+This project is licensed under the MIT License - see the LICENSE file for details (add a LICENSE file if desired).
+
+
+# Acknowledgments
 CrewAI for the agent framework.
 Streamlit for the web interface.
 PyMuPDF and Mammoth for document processing.
