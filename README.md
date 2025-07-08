@@ -23,10 +23,10 @@ git clone https://github.com/bassemalyyy/Resume-Reviewer-Agent.git
 
 # Create a virtual environment (optional):
 
-
+```sh
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
+venv\Scripts\activate # On Windows
+```
 
 # Install dependencies:
 
@@ -49,10 +49,15 @@ Review the feedback, improved resume, and suggested job roles.
 
 # Project Structure
 > ├── resume-review-agent.py    # Main application file
+> 
 > ├── requirements.txt         # Dependency list
+> 
 > ├── cv-*.docx               # Sample resume files
+> 
 > ├── Bruce-Wayne-CV.pdf      # Sample PDF resume
+> 
 > ├── README.md               # This file
+> 
 > └── .gitignore              # Git ignore file
 
 # Contributing
